@@ -50,7 +50,8 @@ const props = defineProps<{
   name: string
 }>()
 
-const { model } = await useControls()
+const router = useRouter()
+const { model, routerParams } = await useControls()
 
 const q = ref(model[props.name])
 const isOpen = ref(false)
@@ -70,11 +71,15 @@ const { t } = useI18n()
 const submit = () => {
   model[props.name] = q.value
   isOpen.value = false
+  router.push({
+    path: '/',
+    query: routerParams.value,
+  })
 }
 
 watch(
   () => model[props.name],
-  (value) => { q.value = value }
+  (value) => { q.value = value },
 )
 
 const items = computed(() => data.value?.data.map(item => new Item(item)) ?? [])

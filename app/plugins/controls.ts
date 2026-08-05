@@ -437,6 +437,7 @@ const controlsService = async (
     resetFilters,
     selectedFilters,
     filterParams: computed(() => Object.entries(routerParams.value).map(([key, value]) => `${key}=${value}`).join('&')),
+    routerParams,
 
     options: computed(() => aggDataFetch?.data.value),
 
